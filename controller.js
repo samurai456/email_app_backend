@@ -67,6 +67,24 @@ async function dispatch(data, ws, online){
             if (i!==-1){
                 online.splice(i, 1);
             }
+            return
+        }
+        case 'get-sug-nicknames':{
+            const srcs = await Message.find({src: new RegExp('^'+data.contain)})
+            const dsts = await Message.find({dst: new RegExp('^'+data.contain)})
+            const uniqs = [];
+            srcs.forEach(i=>{
+                if(!uniqs.includes(i.src)) uniqs.push(i.src);
+            })
+            dsts.forEach(i=>{
+                if(!uniqs.includes(i.dst)) uniqs.push(i.dst);
+            })
+            const resp = JSON.stringify({
+                type: 'sug-nicknames',
+                sugNicknames: uniqs,
+            })
+            ws.send(resp);
+            return
         }
         
     }
