@@ -19,7 +19,7 @@ app.get('/new-message', callback);
 app.get('/message/:id', callback);
 
 const server = http.createServer(app);
-const dbUrl = "mongodb+srv://user:user34567@cluster0.oez3z3j.mongodb.net/?retryWrites=true&w=majority"
+const dbUrl = "mongodb+srv://<login>:<pass>@cluster0.odsaddej.mongodb.net/?retryWrites=true&w=majority"
 
 const webSocketServer = new WebSocket.Server({ server });
 
